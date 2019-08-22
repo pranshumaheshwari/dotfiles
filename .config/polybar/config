@@ -1,0 +1,315 @@
+; Global Settings
+margin-bottom = 4
+margin-top = 4
+
+; Colors
+[colors]
+background = #222
+background-alt = #444
+foreground = #DFDFDF
+foreground-alt = #55
+primary = #FFB52A
+secondary = #E60053
+alert = #BD2C40
+
+amareloescuro = #ECD078
+amareloouro = #FFD700
+azulsky = #00BFFF
+azulclaro = #63B6D9
+azulescuro = #20312F
+cinza = #DCDEDB
+cinzaclaro = #C5E0DC
+cinzaescuro = #172D3A
+escuro = #171719
+escuro_tras = #000000f5
+escuro_old = #1C252E
+verde = #8A9B0F
+verdeclaro = #32CD32
+vermelho = #FF0000
+vermelhoclaro = #FE4365
+vermelhoescuro = #8E1632
+nocolor = #0000
+
+; Topbar
+[bar/top]
+width = 100%
+height = 23
+fixed-center = true
+;bottom = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+padding-left = 2
+padding-right = 2
+
+module-margin-left = 2
+module-margin-right = 2
+
+font-0 = Source\ Code\ Pro:size=7;1
+font-1 = Icons:size=7;2
+
+modules-left = memory cpu filesystem github
+modules-center = xwindow
+modules-right = breaktimer wlan
+
+; Bottombar
+[bar/bot]
+width = 100%
+height = 30
+fixed-center = true
+bottom = true
+
+background = ${colors.escuro_tras}
+foreground = ${colors.foreground}
+
+padding-left = 0
+padding-right = 1
+
+module-margin-left = 2
+module-margin-right = 2
+
+font-0 = Source\ Code\ Pro:size=7;1
+font-1 = Icons:size=7;2
+
+modules-left = i3
+modules-center = lastfm
+modules-right = backlight pulseaudio battery date
+
+tray-position = right
+tray-padding = 3
+tray-background = ${colors.nocolor}
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; MODULES ;
+
+; Menu
+[module/menu]
+type = custom/menu
+format = <label-toggle> <menu>
+label-open = 
+label-close = [X]
+label-separator = " | "
+label-foreground = ${colors.cinzaclaro}
+expand-right = true
+menu-0-0 = Dev
+menu-0-0-exec = menu-open-1
+menu-0-1 = Game Mode
+menu-0-1-exec = killall compton & killall conky & killall node & killall electron
+
+menu-1-0 = Atom
+menu-1-0-exec = atom
+menu-1-1 = Chrome
+menu-1-1-exec = google-chrome-unstable
+menu-1-2 = Terminal
+menu-1-2-exec = xfce4-terminal
+
+; Xwindow
+[module/xwindow]
+type = internal/xwindow
+label = " %title:0:50:...%"
+label-foreground = ${colors.cinzaclaro}
+
+; Filesystem
+[module/filesystem]
+type = internal/fs
+interval = 3600 ;1H;
+
+mount-0 = /
+
+label-mounted = " %percentage_used%% @TiagoEDGE"
+label-mounted-foreground = ${colors.cinzaclaro}
+
+; i3
+[module/i3]
+type = internal/i3
+index-sort = true
+strip-wsnumbers = true
+;format = <label-state> <label-mode> <ws-icon>
+;wrapping-scroll = false
+
+label-focused = %index%: %icon%
+label-focused-foreground = ${colors.cinzaescuro}
+label-focused-background = ${colors.cinzaclaro}
+label-focused-padding = 1
+
+label-unfocused = %index%: %icon%
+label-unfocused-padding = 1
+label-unfocused-foreground = ${colors.cinzaclaro}
+
+label-urgent = %index%: %icon%
+label-urgent-foreground = ${colors.vermelhoclaro}
+label-urgent-padding = 1
+
+ws-icon-1 = "1;"
+ws-icon-2 = "2;"
+ws-icon-3 = "3;"
+ws-icon-4 = "4;"
+ws-icon-5 = "5;"
+ws-icon-6 = "6;"
+ws-icon-7 = "7;"
+ws-icon-8 = "8;"
+ws-icon-9 = "9;"
+ws-icon-0 = "10;"
+ws-icon-default = " desktop"
+
+; backlight
+[module/backlight]
+type = internal/backlight
+card = radeon_bl0
+format = <label>
+format-foreground = ${colors.cinzaclaro}
+label = " %percentage%%"
+
+; CPU
+[module/cpu]
+type = internal/cpu
+interval = 1
+format-foreground = ${colors.cinzaclaro}
+label = " CPU %percentage:2%%"
+
+; Memory
+[module/memory]
+type = internal/memory
+interval = 10
+
+format = <label>
+format-foreground = ${colors.cinzaclaro}
+label = " RAM %gb_used%/%gb_total%"
+
+; Wireless
+[module/wlan]
+type = internal/network
+interface = wlan0
+interval = 2
+
+format-connected = <label-connected>
+
+label-connected = " %essid%  %downspeed%  %upspeed% "
+label-connected-foreground = ${colors.verdeclaro}
+
+label-disconnected = "No Wi-Fi connected "
+label-disconnected-foreground = ${colors.vermelhoclaro}
+
+; Ethernet
+[module/eth]
+type = internal/network
+interface = eno1
+interval = 0
+
+format-connected = <label-connected>
+
+label-connected = " %local_ip%   %downspeed%  %upspeed% "
+label-connected-foreground = ${colors.cinzaclaro}
+
+label-disconnected = "LAN off "
+label-disconnected-foreground = ${colors.vermelhoclaro}
+
+; Date
+[module/date]
+type = internal/date
+interval = 1
+
+date = ""
+date-alt = " %Y-%m-%d"
+
+time = "%b %d, %H:%M"
+label = " %time%"
+
+label-foreground = ${colors.vermelhoclaro}
+
+; Volume
+[module/pulseaudio]
+type = internal/pulseaudio
+
+format-volume = <label-volume>
+
+label-volume = " %percentage%%"
+label-volume-foreground = ${colors.azulclaro}
+
+label-muted = " Mute"
+label-muted-foreground = ${colors.cinzaclaro}
+
+; Battery
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 99
+
+format-charging = <animation-charging> <label-charging>
+format-charging-prefix = " Charging "
+format-charging-foreground = ${colors.verdeclaro}
+
+format-discharging = <ramp-capacity><label-discharging>
+
+label-discharging = %percentage%%
+label-discharging-foreground = ${colors.verdeclaro}
+label-full = " %percentage%%"
+label-full-foreground = ${colors.cinzaclaro}
+
+ramp-capacity-0 = " "
+ramp-capacity-1 = " "
+ramp-capacity-2 = " "
+ramp-capacity-3 = " "
+ramp-capacity-4 = " "
+ramp-capacity-0-foreground = ${colors.vermelhoescuro}·
+ramp-capacity-1-foreground = ${colors.vermelhoclaro}
+ramp-capacity-2-foreground = ${colors.amareloescuro}
+ramp-capacity-3-foreground = ${colors.verdeclaro}
+ramp-capacity-4-foreground = ${colors.verdeclaro}
+
+animation-charging-0 = ""
+animation-charging-1 = ""
+animation-charging-2 = ""
+animation-charging-3 = ""
+animation-charging-4 = ""
+animation-charging-framerate = 350
+
+; Lastfm custom
+[module/lastfm]
+type = custom/script
+exec = bash $HOME/.config/polybar/scripts/lastfm
+format-prefix = " "
+format-foreground = ${colors.verde}
+tail = true
+click-left = bash $HOME/.config/polybar/scripts/lastfm-love
+click-right = bash $HOME/.config/polybar/scripts/lastfm-charging
+
+; Spotify custom
+[module/spotify]
+type = custom/script
+format-prefix = " "
+interval = 20
+exec = bash $HOME/.config/polybar/scripts/music
+format-foreground = ${colors.verde}
+
+; Github custom
+[module/github]
+type = custom/script
+format-prefix = "  "
+format-foreground = ${colors.cinzaclaro}
+exec = TOKEN="$(cat $HOME/.config/polybar/.env/github-token)"; polybar-github $HOME/.config/polybar/.env/github $TOKEN 150 all+participating true
+click-left = echo left >> $HOME/.config/polybar/.env/github
+click-middle = echo middle >> $HOME/.config/polybar/.env/github
+click-right = echo right >> $HOME/.config/polybar/.env/github
+scroll-up = echo scrollUp >> $HOME/.config/polybar/.env/github
+scroll-down = echo scrollDown >> $HOME/.config/polybar/.env/github
+tail = true
+
+; Polybar Break Timer
+[module/breaktimer]
+type = custom/script
+format-prefix = "Break Timer "
+format-foreground = ${colors.verdeclaro}
+exec = polybar-break-timer $HOME/.config/polybar/.env/break-timer 20
+click-left = echo left >> $HOME/.config/polybar/.env/break-timer
+click-middle = echo middle >> $HOME/.config/polybar/.env/break-timer
+click-right = echo right >> $HOME/.config/polybar/.env/break-timer
+scroll-up = echo scrollUp >> $HOME/.config/polybar/.env/break-timer
+scroll-down = echo scrollDown >> $HOME/.config/polybar/.env/break-timer
+tail = true
