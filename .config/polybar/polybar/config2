@@ -14,7 +14,7 @@ wm-name = topbar
 
 modules-left = i3
 modules-center = date
-modules-right = network-wireless network-wired battery
+modules-right = network battery
 
 [module/i3]
 type = internal/i3
@@ -23,8 +23,7 @@ strip-wsnumbers = true
 
 ws-icon-0 = 1;○
 ws-icon-1 = 2;#
-ws-icon-2 = 3;</>
-ws-icon-3 = 4;^
+ws-icon-2 = 3;<>
 ws-icon-default = ♟
 
 label-visible-underline = #FFFFFF
@@ -50,7 +49,7 @@ time = %H:%M
 date = %A, %d %B %Y,    %H:%M
 time-alt = %H:%M:%S
 
-[module/network-wireless]
+[module/network]
 type = internal/network
 interface = wlp3s0
 interval = 3.0
@@ -59,27 +58,6 @@ format-disconnected = %{A1:$HOME/.scripts/nmcli-rofi/nmcli-rofi:}<label-disconne
 format-packetloss = <animation-packetloss> <label-connected>
 label-connected = %essid% %downspeed:9%  |
 label-disconnected = NC  |
-ramp-signal-0 = 😱
-ramp-signal-1 = 😠
-ramp-signal-2 = 😒
-ramp-signal-3 = 😊
-ramp-signal-4 = 😃
-ramp-signal-5 = 😈
-animation-packetloss-0 = ⚠
-animation-packetloss-0-foreground = #ffa64c
-animation-packetloss-1 = 📶
-animation-packetloss-1-foreground = #000000
-animation-packetloss-framerate = 500
-
-[module/network-wired]
-type = internal/network
-interface = enp4s0
-interval = 3.0
-format-connected = <label-connected>
-format-disconnected = <label-disconnected>
-format-packetloss = <animation-packetloss> <label-connected>
-label-connected = |  %local_ip% %downspeed:9%  |
-label-disconnected = |  NC  |
 ramp-signal-0 = 😱
 ramp-signal-1 = 😠
 ramp-signal-2 = 😒
